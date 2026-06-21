@@ -1,5 +1,9 @@
 # Perkline
 
+> **Benefits, made useful.**
+
+**Live demo:** https://perkline.vercel.app · **Source:** https://github.com/robenn044/perkline
+
 Perkline is a TeamSystem-native corporate-welfare marketplace built for the JunctionX Tirana
 PERX challenge. It turns employer benefit allowance into personalized Tirana offers and
 multi-provider collections, then proves the full economic loop:
@@ -7,6 +11,14 @@ multi-provider collections, then proves the full economic loop:
 `employee selects → policy/manager approval → employer settles providers → vouchers unlock`
 
 The employee never receives benefit cash. “Perkline Credit” means internal allowance and vouchers only.
+
+Sign in on the live demo with `employee@perkline.demo` or `admin@perkline.demo` (password
+`demo1234`), or use the one-click demo buttons.
+
+> **Note on hosting:** the demo uses an in-memory store (`src/lib/store.ts`) with one-click reset.
+> On serverless hosting, mutating flows (submit → approve → voucher) may not persist across separate
+> function instances; seeded browse/discovery views always work. Swap the store for a database for a
+> stateful deployment — it is the only data boundary.
 
 ## Run locally
 
