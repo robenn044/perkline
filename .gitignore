@@ -17,3 +17,8 @@ npm-debug.log*
 
 # Challenge brief — not redistributed in the public repo
 Perx_Challenge_Brief.pdf
+
+# Local-only developer briefing + pitch (not published)
+PRESENTATION.md
+
+.vercel
