@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Perkline design system — tokenized.
+  Warm-neutral base + ONE controlled brand accent (petrol teal). Calm, dense,
+  finance/HR-grade. No glass content cards, no rainbow gradients, no glow.
+  Semantic status roles, restrained elevation, 8px spacing (Tailwind scale),
+  dark-mode-ready via the .dark class.
+*/
+
+@layer base {
+  :root {
+    /* Surfaces — warm neutral */
+    --background: 40 33% 97%;
+    --foreground: 25 14% 15%;
+
+    --card: 40 40% 99%;
+    --card-foreground: 25 14% 15%;
+
+    --popover: 40 40% 99%;
+    --popover-foreground: 25 14% 15%;
+
+    /* Brand accent — deep petrol teal (the only saturated hue) */
+    --primary: 190 72% 27%;
+    --primary-foreground: 40 33% 98%;
+
+    /* Neutral surfaces */
+    --secondary: 38 22% 93%;
+    --secondary-foreground: 25 14% 22%;
+
+    --muted: 38 22% 94%;
+    /* AA (>=4.5:1) warm grey on the bone background */
+    --muted-foreground: 28 8% 38%;
+
+    /* Hover/active surface — warm neutral, not a second accent */
+    --accent: 38 24% 90%;
+    --accent-foreground: 25 14% 18%;
+
+    /* Semantic statuses — muted, never neon */
+    --destructive: 6 64% 45%;
+    --destructive-foreground: 40 33% 98%;
+
+    --success: 152 44% 31%;
+    --success-foreground: 40 33% 98%;
+
+    --warning: 33 82% 40%;
+    --warning-foreground: 40 33% 98%;
+
+    --border: 36 18% 87%;
+    --input: 36 18% 86%;
+    --ring: 190 72% 30%;
+
+    /* Restrained elevation (warm-tinted) */
+    --shadow-color: 28 30% 14%;
+
+    --radius: 0.625rem;
+  }
+
+  .dark {
+    --background: 25 10% 9%;
+    --foreground: 40 20% 92%;
+
+    --card: 25 9% 12%;
+    --card-foreground: 40 20% 92%;
+
+    --popover: 25 9% 12%;
+    --popover-foreground: 40 20% 92%;
+
+    --primary: 184 52% 44%;
+    --primary-foreground: 190 60% 8%;
+
+    --secondary: 25 8% 17%;
+    --secondary-foreground: 40 18% 88%;
+
+    --muted: 25 8% 17%;
+    --muted-foreground: 38 10% 64%;
+
+    --accent: 25 8% 20%;
+    --accent-foreground: 40 18% 90%;
+
+    --destructive: 6 58% 52%;
+    --destructive-foreground: 40 20% 96%;
+
+    --success: 152 46% 42%;
+    --success-foreground: 152 60% 7%;
+
+    --warning: 33 74% 52%;
+    --warning-foreground: 33 82% 8%;
+
+    --border: 25 8% 21%;
+    --input: 25 8% 23%;
+    --ring: 184 52% 46%;
+
+    --shadow-color: 0 0% 0%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  /* A calm, intentional type scale — tight headings, comfortable body. */
+  h1, h2, h3, h4 {
+    letter-spacing: -0.011em;
+  }
+
+  /* Consistent, visible keyboard focus on every interactive element. */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Respect reduced-motion: neutralize CSS animations & transitions.
+     framer-motion is handled globally via MotionConfig reducedMotion="user". */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Skip link — visually hidden until focused, then pinned top-left. */
+  .skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 100;
+    transform: translateY(-150%);
+    transition: transform 0.15s ease;
+    border-radius: 0.5rem;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    padding: 0.5rem 0.9rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  /* App background — flat warm neutral. One barely-there top wash, no rainbow. */
+  .perx-aurora {
+    background:
+      linear-gradient(180deg, hsl(190 30% 96%) 0%, hsl(var(--background)) 220px),
+      hsl(var(--background));
+    background-attachment: fixed;
+  }
+  .dark .perx-aurora {
+    background:
+      linear-gradient(180deg, hsl(190 20% 13%) 0%, hsl(var(--background)) 220px),
+      hsl(var(--background));
+  }
+
+  /* Header surface — solid with a hairline divider, minimal blur (not a glass card). */
+  .glass {
+    background: hsl(var(--card) / 0.88);
+    backdrop-filter: saturate(1.2) blur(8px);
+    -webkit-backdrop-filter: saturate(1.2) blur(8px);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, hsl(0 0% 100% / 0.28), transparent);
+    animation: shimmer 1.6s infinite;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
