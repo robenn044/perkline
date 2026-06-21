@@ -14,3 +14,6 @@ npm-debug.log*
 /tmp
 /.claude
 *.log
+
+# Challenge brief — not redistributed in the public repo
+Perx_Challenge_Brief.pdf
